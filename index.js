@@ -30,6 +30,21 @@ app.get('/all', (req, res) => {
   })
 })
 
+app.get('/add/:imie/:nazwisko/:wiek', (req, res)=>{
+  const imie = req.params.imie
+  const nazwisko = req.params.nazwisko
+  const wiek = req.params.wiek
+
+  let sql = `INSERT INTO osoby VALUES ("", "${imie}", "${nazwisko}", "${wiek}")`
+  conn.query(sql, (err, data, data_info) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data)
+    }
+  })
+})
+
 app.listen(3000, () => {
   console.log('Serwer uruchomiony na porcie 3000')
 })
