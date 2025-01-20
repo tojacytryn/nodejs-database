@@ -11,7 +11,7 @@ var conn = mysql.createConnection({
 });
 
 conn.connect((err) => {
-  if (err){
+  if (err) {
     console.log("Nie połączono z bazą danych");
     console.log(err);
   } else {
@@ -20,8 +20,14 @@ conn.connect((err) => {
 
 })
 
-app.get('/', (req, res) => {
-  res.send("test")
+app.get('/all', (req, res) => {
+  conn.query("SELECT * FROM osoby", (err, data, data_info) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(data)
+    }
+  })
 })
 
 app.listen(3000, () => {
